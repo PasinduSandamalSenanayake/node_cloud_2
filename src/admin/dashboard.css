@@ -1,0 +1,214 @@
+/* Styles for Admin Dashboard */
+
+.admin-dashboard {
+  display: flex;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+/* Sidebar Styles */
+.sidebar {
+  width: 20%;
+  background-color: #2c3e50;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar button {
+  background-color: #34495e;
+  color: white;
+  border: none;
+  padding: 15px;
+  margin: 10px 0;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.sidebar button:hover {
+  background-color: #1abc9c;
+}
+
+.sidebar button.active {
+  background-color: #1abc9c;
+}
+
+/* Content Styles */
+.content {
+  width: 80%;
+  padding: 20px;
+  background-color: #ecf0f1;
+}
+
+.content h1 {
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+.content ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.content ul li {
+  background-color: #fff;
+  margin: 10px 0;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Add Button Styles */
+.add-button {
+  background-color: #1abc9c;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.add-button:hover {
+  background-color: #16a085;
+}
+
+/* Update Button Styles */
+.update-button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-right: 5px;
+  transition: background-color 0.3s;
+}
+
+.update-button:hover {
+  background-color: #2980b9;
+}
+
+/* Delete Button Styles */
+.delete-button {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.delete-button:hover {
+  background-color: #c0392b;
+}
+
+/* Basic Styling for Admin Dashboard */
+.add-button {
+  background-color: #4caf50; /* Green background */
+  color: white; /* White text color */
+  border: none; /* No border */
+  padding: 10px 20px; /* Add padding for size */
+  font-size: 16px; /* Set font size */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  border-radius: 5px; /* Rounded corners */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions for background color and scale */
+}
+
+.add-button:hover {
+  background-color: #45a049; /* Darker green when hovered */
+  transform: scale(1.05); /* Slight zoom effect on hover */
+}
+
+.add-button:active {
+  background-color: #397f3d; /* Even darker green when pressed */
+  transform: scale(1); /* Remove zoom effect when pressed */
+}
+
+.add-button:focus {
+  outline: none; /* Remove default focus outline */
+  box-shadow: 0 0 5px rgba(72, 163, 66, 0.8); /* Add custom focus outline */
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal h2 {
+  text-align: center;
+}
+
+.modal label {
+  display: block;
+  margin: 10px 0;
+}
+
+.modal input {
+  width: 100%;
+  padding: 8px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.modal input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.modal div {
+  display: flex;
+  justify-content: center;
+}
+
+.submit-button,
+.close-button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  margin: 2px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.submit-button:hover,
+.close-button:hover {
+  background-color: #45a049;
+}
+
+.close-button {
+  background-color: #f44336; /* Red color for close */
+}
+
+.close-button:hover {
+  background-color: #e41c00;
+}
