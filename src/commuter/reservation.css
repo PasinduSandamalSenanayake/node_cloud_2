@@ -1,0 +1,69 @@
+/* reservation.css */
+
+.reservation-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.trip-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.trip-details label {
+  font-weight: bold;
+}
+
+.seat-selection {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr); /* 9 seats per row */
+  gap: 10px;
+  justify-content: center;
+}
+
+.seat {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.seat:hover {
+  background-color: #a0a0a0;
+}
+
+.seat.selected {
+  background-color: #007bff;
+  color: white;
+}
+
+.confirm-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  width: 100%;
+  background-color: #28a745;
+  color: white;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.confirm-button:hover {
+  background-color: #218838;
+}

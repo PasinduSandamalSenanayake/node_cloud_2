@@ -8,13 +8,13 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     // Replace this with real authentication logic if needed
-    navigate("/adminDashboard"); // Redirect to dashboard
+    navigate("/operatorDashboard"); // Redirect to dashboard
   };
 
   return (
     <div className="login-container">
       <form className="login-form" onSubmit={handleLogin}>
-        <h2>Admin Login</h2>
+        <h2>Operator Login</h2>
 
         <div className="form-group">
           <label htmlFor="email">Email</label>

@@ -4,10 +4,32 @@ import "./dashboard.css";
 const AdminDashboard = () => {
   const [selectedCategory, setSelectedCategory] = useState("bus");
   const [isModalOpen, setIsModalOpen] = useState(false); // State to manage modal visibility
+
+  // State to manage Bus, Operator, and Route data
   const [busData, setBusData] = useState({
     busType: "",
     busNumber: "",
     seatCount: "",
+  });
+
+  const [operatorData, setOperatorData] = useState({
+    firstName: "",
+    lastName: "",
+    age: "",
+    email: "",
+    password: "",
+    mobile: "",
+    nic: "",
+  });
+
+  const [routeData, setRouteData] = useState({
+    startPlace: "",
+    endPlace: "",
+    stopPlaces: "",
+    routeNumber: "",
+    price1: "",
+    price2: "",
+    price3: "",
   });
 
   const items = {
@@ -18,7 +40,7 @@ const AdminDashboard = () => {
   };
 
   const handleAddItem = () => {
-    setIsModalOpen(true); // Open the modal when "Add Bus" is clicked
+    setIsModalOpen(true); // Open the modal based on selected category
   };
 
   const handleModalClose = () => {
@@ -27,12 +49,24 @@ const AdminDashboard = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setBusData({ ...busData, [name]: value });
+    if (selectedCategory === "operator") {
+      setOperatorData({ ...operatorData, [name]: value });
+    } else if (selectedCategory === "bus") {
+      setBusData({ ...busData, [name]: value });
+    } else if (selectedCategory === "routes") {
+      setRouteData({ ...routeData, [name]: value });
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Bus Data Submitted:", busData);
+    if (selectedCategory === "bus") {
+      console.log("Bus Data Submitted:", busData);
+    } else if (selectedCategory === "operator") {
+      console.log("Operator Data Submitted:", operatorData);
+    } else if (selectedCategory === "routes") {
+      console.log("Route Data Submitted:", routeData);
+    }
     setIsModalOpen(false); // Close the modal after form submission
   };
 
@@ -140,6 +174,189 @@ const AdminDashboard = () => {
                   value={busData.seatCount}
                   onChange={handleInputChange}
                   required
+                />
+              </label>
+              <div>
+                <button type="submit" className="submit-button">
+                  Submit
+                </button>
+                <button
+                  type="button"
+                  className="close-button"
+                  onClick={handleModalClose}
+                >
+                  Close
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Modal for Adding Operator */}
+      {isModalOpen && selectedCategory === "operator" && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <h2>Add New Operator</h2>
+            <form onSubmit={handleSubmit}>
+              <label>
+                First Name:
+                <input
+                  type="text"
+                  name="firstName"
+                  value={operatorData.firstName}
+                  onChange={handleInputChange}
+                  required
+                />
+              </label>
+              <label>
+                Last Name:
+                <input
+                  type="text"
+                  name="lastName"
+                  value={operatorData.lastName}
+                  onChange={handleInputChange}
+                  required
+                />
+              </label>
+              <label>
+                Age:
+                <input
+                  type="number"
+                  name="age"
+                  value={operatorData.age}
+                  onChange={handleInputChange}
+                  required
+                />
+              </label>
+              <label>
+                Email:
+                <input
+                  type="email"
+                  name="email"
+                  value={operatorData.email}
+                  onChange={handleInputChange}
+                  required
+                />
+              </label>
+              <label>
+                Password:
+                <input
+                  type="password"
+                  name="password"
+                  value={operatorData.password}
+                  onChange={handleInputChange}
+                  required
+                />
+              </label>
+              <label>
+                Mobile:
+                <input
+                  type="text"
+                  name="mobile"
+                  value={operatorData.mobile}
+                  onChange={handleInputChange}
+                  required
+                />
+              </label>
+              <label>
+                NIC:
+                <input
+                  type="text"
+                  name="nic"
+                  value={operatorData.nic}
+                  onChange={handleInputChange}
+                  required
+                />
+              </label>
+              <div>
+                <button type="submit" className="submit-button">
+                  Submit
+                </button>
+                <button
+                  type="button"
+                  className="close-button"
+                  onClick={handleModalClose}
+                >
+                  Close
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Modal for Adding Route */}
+      {isModalOpen && selectedCategory === "routes" && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <h2>Add New Route</h2>
+            <form onSubmit={handleSubmit}>
+              <label>
+                Start Place:
+                <input
+                  type="text"
+                  name="startPlace"
+                  value={routeData.startPlace}
+                  onChange={handleInputChange}
+                  required
+                />
+              </label>
+              <label>
+                End Place:
+                <input
+                  type="text"
+                  name="endPlace"
+                  value={routeData.endPlace}
+                  onChange={handleInputChange}
+                  required
+                />
+              </label>
+              <label>
+                Stop Places (optional):
+                <input
+                  type="text"
+                  name="stopPlaces"
+                  value={routeData.stopPlaces}
+                  onChange={handleInputChange}
+                />
+              </label>
+              <label>
+                Route Number:
+                <input
+                  type="text"
+                  name="routeNumber"
+                  value={routeData.routeNumber}
+                  onChange={handleInputChange}
+                  required
+                />
+              </label>
+              <label>
+                Price 1:
+                <input
+                  type="number"
+                  name="price1"
+                  value={routeData.price1}
+                  onChange={handleInputChange}
+                  required
+                />
+              </label>
+              <label>
+                Price 2 (optional):
+                <input
+                  type="number"
+                  name="price2"
+                  value={routeData.price2}
+                  onChange={handleInputChange}
+                />
+              </label>
+              <label>
+                Price 3 (optional):
+                <input
+                  type="number"
+                  name="price3"
+                  value={routeData.price3}
+                  onChange={handleInputChange}
                 />
               </label>
               <div>

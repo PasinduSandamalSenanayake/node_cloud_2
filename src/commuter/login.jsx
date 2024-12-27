@@ -8,13 +8,13 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     // Replace this with real authentication logic if needed
-    navigate("/adminDashboard"); // Redirect to dashboard
+    navigate("/commuterReservation"); // Redirect to dashboard
   };
 
   return (
-    <div className="login-container">
-      <form className="login-form" onSubmit={handleLogin}>
-        <h2>Admin Login</h2>
+    <div className="login-container" onSubmit={handleLogin}>
+      <form className="login-form">
+        <h2>Commuter Login</h2>
 
         <div className="form-group">
           <label htmlFor="email">Email</label>
@@ -35,6 +35,14 @@ const Login = () => {
             required
           />
         </div>
+
+        <button
+          type="button"
+          className="register-link"
+          onClick={() => navigate("/commuterRegister")}
+        >
+          Register
+        </button>
 
         <button type="submit" className="login-button">
           Login
