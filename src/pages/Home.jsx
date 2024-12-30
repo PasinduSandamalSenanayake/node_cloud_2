@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Home.css";
 import imageBus from "../images/bus.jpg";
+import "./Home.css";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -11,44 +11,46 @@ const Home = () => {
   const [destinationTo, setDestinationTo] = useState("");
   const [date, setDate] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const destinations = ["Colombo", "Kandy", "Galle", "Jaffna", "Matara"];
-  const trips = [
-    {
-      from: "Colombo",
-      to: "Kandy",
-      date: "2024-12-24",
-      time: "10:00 AM",
-      bus: "Bus 1",
-      seatsAvailable: 20,
-    },
-    {
-      from: "Kandy",
-      to: "Galle",
-      date: "2024-12-25",
-      time: "11:00 AM",
-      bus: "Bus 2",
-      seatsAvailable: 15,
-    },
-    {
-      from: "Colombo",
-      to: "Jaffna",
-      date: "2024-12-26",
-      time: "9:00 AM",
-      bus: "Bus 3",
-      seatsAvailable: 25,
-    },
-    // Add more trip data as necessary
-  ];
 
-  const handleSearch = () => {
-    const filteredTrips = trips.filter(
-      (trip) =>
-        (destinationFrom ? trip.from === destinationFrom : true) &&
-        (destinationTo ? trip.to === destinationTo : true) &&
-        (date ? trip.date === date : true)
-    );
-    setSearchResults(filteredTrips);
+  const handleSearch = async () => {
+    setLoading(true);
+    setError("");
+
+    try {
+      const response = await fetch(
+        `https://webapi-cw-014-183873252446.asia-south1.run.app/trips`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      const data = await response.json();
+      console.log("API Response:", data); // Log the response here
+
+      if (!data || !Array.isArray(data.data)) {
+        throw new Error("API response does not contain a valid array of trips");
+      }
+
+      const filteredTrips = data.data.filter(
+        (trip) =>
+          (destinationFrom ? trip.startPlace === destinationFrom : true) &&
+          (destinationTo ? trip.endPlace === destinationTo : true) &&
+          (date ? trip.date === date : true)
+      );
+
+      setSearchResults(filteredTrips);
+    } catch (err) {
+      setError(err.message || "Something went wrong.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -63,14 +65,12 @@ const Home = () => {
           >
             Admin
           </button>
-
           <button
             className="navbar-button"
             onClick={() => navigate("/operatorLogin")}
           >
             Operator
           </button>
-
           <button className="navbar-button">Commuter</button>
         </div>
       </nav>
@@ -155,6 +155,10 @@ const Home = () => {
         </div>
       </div>
 
+      {/* Loading and Error Messages */}
+      {loading && <p>Loading trips..</p>}
+      {error && <p className="error">{error}</p>}
+
       {/* Search Results */}
       {searchResults.length > 0 && (
         <div className="search-results">
@@ -164,21 +168,43 @@ const Home = () => {
               <li key={index} className="search-result-item">
                 <p>
                   <strong>
-                    {trip.from} to {trip.to}
+                    {trip.startPlace} to {trip.endPlace}
                   </strong>
                   <br />
-                  Date: {trip.date}
+                  Date: {new Date(trip.date).toLocaleDateString()}
                   <br />
-                  Time: {trip.time}
+                  Time: {trip.startTime} - {trip.endTime}
                   <br />
-                  Bus: {trip.bus}
+                  Bus: {trip.busNumber}
                   <br />
-                  Available Seats: {trip.seatsAvailable}
+                  {/* <ul>
+                    {trip.availableSeatArray.map((seat, index) => {
+                      const seatNumber = Object.keys(seat)[0]; // Get the seat number
+                      const seatStatus = seat[seatNumber]; // Get the seat status
+                      return (
+                        <li key={index}>
+                          Seat {seatNumber}: {seatStatus}
+                        </li>
+                      );
+                    })}
+                  </ul> */}
                 </p>
                 {/* Add the Book button */}
                 <button
                   className="book-button"
-                  onClick={() => navigate("/commuterLogin")}
+                  onClick={() =>
+                    navigate("/commuterReservation", {
+                      state: {
+                        tripId: trip._id,
+                        startPlace: trip.startPlace,
+                        endPlace: trip.endPlace,
+                        availableSeatArray: trip.availableSeatArray,
+                        price1: trip.price1,
+                        routeId: trip.routeId,
+                        busId: trip.busId,
+                      },
+                    })
+                  }
                 >
                   Book
                 </button>

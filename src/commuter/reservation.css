@@ -67,3 +67,36 @@ h1 {
 .confirm-button:hover {
   background-color: #218838;
 }
+
+/* Add more styles as needed */
+
+.seat {
+  width: 30px;
+  height: 30px;
+  margin: 5px;
+  display: inline-block;
+  text-align: center;
+  line-height: 30px;
+  border: 1px solid #000;
+  cursor: pointer;
+  background-color: #fff;
+}
+
+.seat.unavailable {
+  background-color: red;
+  cursor: not-allowed;
+}
+
+.seat.selected {
+  background-color: green;
+  color: #fff;
+}
+
+.confirm-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: blue;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
