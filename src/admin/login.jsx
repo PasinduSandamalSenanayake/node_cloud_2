@@ -20,7 +20,7 @@ const Login = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ email, password }),
+          body: JSON.stringify({ email, password, role: "admin" }),
         }
       );
 
@@ -32,6 +32,7 @@ const Login = () => {
         const token = responseText.split(": ")[1]; // Extracts 'eyJh...' after 'token: '
         if (token) {
           localStorage.setItem("token", token.trim());
+          // Redirect to dashboard
           navigate("/adminDashboard");
         } else {
           setError("Failed to retrieve token. Please try again.");
