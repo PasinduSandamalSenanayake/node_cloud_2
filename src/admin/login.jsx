@@ -25,15 +25,12 @@ const Login = () => {
       );
 
       if (response.ok) {
-        const responseText = await response.text(); // Read response as plain text
-        console.log("Raw Response:", responseText);
+        const data = await response.json(); // Parse response as JSON
+        console.log("Parsed Response:", data);
 
-        // Extract token if responseText is in the format: token: eyJh...
-        const token = responseText.split(": ")[1]; // Extracts 'eyJh...' after 'token: '
-        if (token) {
-          localStorage.setItem("token", token.trim());
-          // Redirect to dashboard
-          navigate("/adminDashboard");
+        if (data.token) {
+          localStorage.setItem("token", data.token); // Save token to localStorage
+          navigate("/adminDashboard"); // Redirect to dashboard
         } else {
           setError("Failed to retrieve token. Please try again.");
         }
